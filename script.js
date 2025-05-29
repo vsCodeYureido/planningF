@@ -23,9 +23,9 @@ const reparti = [
 ];
 
 //collegamento con DATABASE
-const supabaseUrl = 'https://vczastvkajskdlyvggoy.supabase.co';
-const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZjemFzdHZrYWpza2RseXZnZ295Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDg0NjAzMDksImV4cCI6MjA2NDAzNjMwOX0.UcRt3rQTdFdHgdNSeGJwSnBbI-cN1bp8_7lfGK3k2zk';
-const supabase = supabase.createClient(supabaseUrl, supabaseKey);
+//const supabaseUrl = 'https://vczastvkajskdlyvggoy.supabase.co';
+//const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZjemFzdHZrYWpza2RseXZnZ295Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDg0NjAzMDksImV4cCI6MjA2NDAzNjMwOX0.UcRt3rQTdFdHgdNSeGJwSnBbI-cN1bp8_7lfGK3k2zk';
+//const supabase = supabase.createClient(supabaseUrl, supabaseKey);
 
 
 let currentUser = '';
