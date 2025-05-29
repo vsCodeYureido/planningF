@@ -247,30 +247,3 @@ document.addEventListener("DOMContentLoaded", () => {
     aggiornaSidebar();
   });
 });
-
-
-// Integrazione esportazione Excel
-const exportBtn = document.createElement("button");
-exportBtn.textContent = "Esporta Excel";
-exportBtn.style.marginLeft = "10px";
-document.querySelector(".navbar").appendChild(exportBtn);
-
-exportBtn.addEventListener("click", () => {
-  const headers = ["Nome", "Reparto", "Inizio Ferie", "Fine Ferie"];
-  const rows = events.map(e => [
-    e.title.split(" - ")[0].trim(),
-    utenti[e.title.split(" - ")[0].trim()],
-    e.start,
-    e.end
-  ]);
-
-  const csvContent = [headers, ...rows].map(row => row.join(",")).join("\n");
-  const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
-  const link = document.createElement("a");
-  link.setAttribute("href", URL.createObjectURL(blob));
-  link.setAttribute("download", "ferie_rc.csv");
-  link.style.display = "none";
-  document.body.appendChild(link);
-  link.click();
-  document.body.removeChild(link);
-});
