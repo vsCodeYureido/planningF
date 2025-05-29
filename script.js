@@ -28,9 +28,12 @@ let calendar;
 
 function popolaReparti() {
   const filtroSelect = document.getElementById("filtroReparto");
-  filtroSelect.innerHTML = '<option value="TUTTI">Tutti i reparti</option>' + reparti.map(r => <option value="${r}">${r}</option>).join('');
+  filtroSelect.innerHTML = '<option value="TUTTI">Tutti i reparti</option>' +
+    reparti.map(r => `<option value="${r}">${r}</option>`).join('');
+  
   const repartoSelect = document.getElementById("reparto");
-  repartoSelect.innerHTML = '<option value="">-- Seleziona reparto --</option>' + reparti.map(r => <option value="${r}">${r}</option>).join('');
+  repartoSelect.innerHTML = '<option value="">-- Seleziona reparto --</option>' +
+    reparti.map(r => `<option value="${r}">${r}</option>`).join('');
 }
 
 function aggiornaSidebar() {
