@@ -30,7 +30,7 @@ function popolaReparti() {
   const filtroSelect = document.getElementById("filtroReparto");
   filtroSelect.innerHTML = '<option value="TUTTI">Tutti i reparti</option>' +
     reparti.map(r => `<option value="${r}">${r}</option>`).join('');
-  
+
   const repartoSelect = document.getElementById("reparto");
   repartoSelect.innerHTML = '<option value="">-- Seleziona reparto --</option>' +
     reparti.map(r => `<option value="${r}">${r}</option>`).join('');
@@ -52,7 +52,7 @@ function aggiornaSidebar() {
       colorBox.className = 'color-box';
       colorBox.style.backgroundColor = colore;
       div.appendChild(colorBox);
-      div.appendChild(document.createTextNode(${nome} (${reparto})));
+      div.appendChild(document.createTextNode(`${nome} (${reparto})`));
       userList.appendChild(div);
     }
   });
@@ -89,9 +89,9 @@ function initCalendar() {
         return;
       }
 
-      const conferma = confirm(Vuoi salvare le ferie dal ${info.startStr} al ${end.toISOString().split('T')[0]} per ${currentUser}?);
+      const conferma = confirm(`Vuoi salvare le ferie dal ${info.startStr} al ${end.toISOString().split('T')[0]} per ${currentUser}?`);
       if (conferma) {
-        const ferie = new Persone(${currentUser} - Ferie, info.startStr, info.endStr, coloriUtente[currentUser]);
+        const ferie = new Persone(`${currentUser} - Ferie`, info.startStr, info.endStr, coloriUtente[currentUser]);
         events.push(ferie);
         aggiornaCalendario();
         aggiornaSidebar();
@@ -180,7 +180,7 @@ function checkVincoli(start, end) {
     }
   } else if (["TV", "GED-PED"].includes(currentReparto)) {
     if (repartiCritici.includes("MAGAZZINO")) {
-      alert(${currentReparto} non può andare in ferie nella settimana del MAGAZZINO.);
+      alert(`${currentReparto} non può andare in ferie nella settimana del MAGAZZINO.`);
       return false;
     }
   }
