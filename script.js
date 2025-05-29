@@ -173,17 +173,33 @@ function checkVincoli(start, end) {
   }
 
   const repartiCritici = ferieSettimana.map(e => utenti[e.title.split(" - ")[0]]);
-  if (currentReparto === "MAGAZZINO") {
-    if (repartiCritici.includes("TV") || repartiCritici.includes("GED-PED")) {
-      alert("Il MAGAZZINO non può andare in ferie nella stessa settimana di un RC del TV o GED-PED.");
-      return false;
+  // if (currentReparto === "MAGAZZINO") {
+  //   if (repartiCritici.includes("TV") || repartiCritici.includes("GED-PED")) {
+  //     alert("Il MAGAZZINO non può andare in ferie nella stessa settimana di un RC del TV o GED-PED.");
+  //     return false;
+  //   }
+  // } else if (["TV", "GED-PED"].includes(currentReparto)) {
+  //   if (repartiCritici.includes("MAGAZZINO")) {
+  //     alert(`${currentReparto} non può andare in ferie nella settimana del MAGAZZINO.`);
+  //     return false;
+  //   }
+  // }
+  // Vincolo reciproco tra MAGAZZINO, TV e GED-PED: massimo 2 RC contemporaneamente
+  let countCritici = 0;
+  ferieSettimana.forEach(e => {
+    const reparto = utenti[e.title.split(" - ")[0]];
+    if (["MAGAZZINO", "TV", "GED-PED"].includes(reparto)) {
+      countCritici++;
     }
-  } else if (["TV", "GED-PED"].includes(currentReparto)) {
-    if (repartiCritici.includes("MAGAZZINO")) {
-      alert(`${currentReparto} non può andare in ferie nella settimana del MAGAZZINO.`);
+  });
+  
+  if (["MAGAZZINO", "TV", "GED-PED"].includes(currentReparto)) {
+    if (countCritici >= 2) {
+      alert("Massimo 2 RC tra MAGAZZINO, TV e GED-PED possono essere in ferie contemporaneamente.");
       return false;
     }
   }
+
 
   const mese = start.getMonth() + 1;
   if (mese < 6 || mese > 9) {
