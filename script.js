@@ -191,15 +191,15 @@ function checkVincoli(start, end) {
     return false;
   }
 
-  const ferieUtente = events.filter(e => e.title.startsWith(currentUser));
-  if (ferieUtente.some(e => {
-    const existingStart = new Date(e.start);
-    const diff = Math.abs((start - existingStart) / (1000 * 60 * 60 * 24));
-    return diff <= 7;
-  })) {
-    alert("Non puoi prenotare due settimane consecutive.");
-    return false;
-  }
+  // const ferieUtente = events.filter(e => e.title.startsWith(currentUser));
+  // if (ferieUtente.some(e => {
+  //   const existingStart = new Date(e.start);
+  //   const diff = Math.abs((start - existingStart) / (1000 * 60 * 60 * 24));
+  //   return diff <= 7;
+  // })) {
+  //   alert("Non puoi prenotare due settimane consecutive.");
+  //   return false;
+  // }
 
   return true;
 }
