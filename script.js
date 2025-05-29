@@ -150,19 +150,15 @@ function checkVincoli(start, end) {
   }
 
   const delloStessoReparto = ferieSettimana.filter(e => utenti[e.title.split(" - ")[0]] === currentReparto);
-  if (currentReparto === "GED-PED") {
-    if (delloStessoReparto.length >= 1) {
-      alert("Solo un RC di GED-PED può andare in ferie per settimana.");
-      return false;
-    }
-  } else if (currentReparto === "CASSE") {
-    // CASSE può andare con GED-PED
-  } else {
+  
+  // Applica il vincolo solo se il reparto NON è GED-PED e NON è CASSE
+  if (!["GED-PED", "CASSE"].includes(currentReparto)) {
     if (delloStessoReparto.length >= 1) {
       alert("Non è possibile avere due RC dello stesso reparto in ferie nella stessa settimana.");
       return false;
     }
   }
+
 
   if (currentReparto === "IT") {
     const giorno31 = new Date("2025-08-31");
