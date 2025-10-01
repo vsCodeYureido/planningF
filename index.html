@@ -186,9 +186,16 @@
       <div id="userList"></div>
     </div>
     <div id="calendar-container">
+    <div id="calendar"></div>
 
-      <div id="calendar"></div>
+    <!-- SEZIONE ESIGENZE -->
+    <div id="esigenzeSection" style="margin-top: 40px;">
+        <h3>Esigenze Personali</h3>
+        <button id="aggiungiEsigenzaBtn" style="margin-bottom: 15px;">Aggiungi Esigenza</button>
+        <div id="elencoEsigenze"></div>
     </div>
+    </div>
+
   </div>
 
   <div id="loginModal">
@@ -201,6 +208,20 @@
       <button id="confirmLogin">Registra</button>
     </div>
   </div>
+
+
+  <!-- Modale per aggiunta esigenza -->
+<div id="esigenzaModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); justify-content:center; align-items:center; z-index:1000;">
+  <div style="background:white; padding:20px; border-radius:8px; width:300px;">
+    <h3>Nuova Esigenza</h3>
+    <label for="esigenzaData">Data</label>
+    <input type="date" id="esigenzaData">
+    <label for="esigenzaTesto">Descrizione</label>
+    <textarea id="esigenzaTesto" rows="3" style="width:100%;"></textarea>
+    <button id="salvaEsigenza" style="margin-top:10px;">Salva</button>
+    <button id="chiudiEsigenzaModal" style="margin-top:10px;">Annulla</button>
+  </div>
+</div>
 
 
 
