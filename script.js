@@ -79,6 +79,7 @@ function initCalendar() {
     locale: 'it',
     selectable: true,
     selectMirror: true,
+    firstDay: 1,
     select: function (info) {
       const start = new Date(info.startStr);
       const end = new Date(info.endStr);
@@ -374,4 +375,5 @@ document.getElementById("salvaEsigenza").addEventListener("click", () => {
 document.getElementById("chiudiEsigenzaModal").addEventListener("click", () => {
   document.getElementById("esigenzaModal").style.display = "none";
 });
+
 
