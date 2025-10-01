@@ -262,3 +262,116 @@ document.addEventListener("DOMContentLoaded", () => {
     aggiornaSidebar();
   });
 });
+
+const esigenze = [];
+let esigenzaInModificaIndex = null;  // Per tracciare se stiamo modificando un'esigenza
+
+function aggiornaElencoEsigenze() {
+  const container = document.getElementById("elencoEsigenze");
+  container.innerHTML = "";
+
+  if (esigenze.length === 0) {
+    container.innerHTML = "<p>Nessuna esigenza inserita.</p>";
+    return;
+  }
+
+  esigenze.sort((a, b) => new Date(a.data) - new Date(b.data));
+
+  esigenze.forEach((e, index) => {
+    const div = document.createElement("div");
+    div.style.padding = "10px";
+    div.style.borderBottom = "1px solid #ccc";
+    div.style.display = "flex";
+    div.style.justifyContent = "space-between";
+    div.style.alignItems = "center";
+
+    const textDiv = document.createElement("div");
+
+    const nome = document.createElement("strong");
+    nome.textContent = `${e.utente} – ${e.data}`;
+
+    const descrizione = document.createElement("p");
+    descrizione.textContent = e.testo;
+    descrizione.style.margin = "5px 0 0 0";
+
+    textDiv.appendChild(nome);
+    textDiv.appendChild(descrizione);
+
+    // Contenitore bottoni
+    const btnDiv = document.createElement("div");
+
+    // Bottone modifica
+    const btnModifica = document.createElement("button");
+    btnModifica.textContent = "Modifica";
+    btnModifica.style.marginRight = "5px";
+    btnModifica.onclick = () => {
+      esigenzaInModificaIndex = index;
+      document.getElementById("esigenzaData").value = e.data;
+      document.getElementById("esigenzaTesto").value = e.testo;
+      document.getElementById("esigenzaModal").style.display = "flex";
+    };
+
+    // Bottone elimina
+    const btnElimina = document.createElement("button");
+    btnElimina.textContent = "Elimina";
+    btnElimina.onclick = () => {
+      if (confirm("Sei sicuro di voler eliminare questa esigenza?")) {
+        esigenze.splice(index, 1);
+        aggiornaElencoEsigenze();
+      }
+    };
+
+    btnDiv.appendChild(btnModifica);
+    btnDiv.appendChild(btnElimina);
+
+    div.appendChild(textDiv);
+    div.appendChild(btnDiv);
+    container.appendChild(div);
+  });
+}
+
+document.getElementById("aggiungiEsigenzaBtn").addEventListener("click", () => {
+  if (!isLoggedIn) {
+    alert("Devi essere loggato per inserire un'esigenza.");
+    return;
+  }
+  esigenzaInModificaIndex = null;  // Nuova esigenza, quindi reset
+  document.getElementById("esigenzaData").value = "";
+  document.getElementById("esigenzaTesto").value = "";
+  document.getElementById("esigenzaModal").style.display = "flex";
+});
+
+document.getElementById("salvaEsigenza").addEventListener("click", () => {
+  const data = document.getElementById("esigenzaData").value;
+  const testo = document.getElementById("esigenzaTesto").value.trim();
+
+  if (!data || !testo) {    
+    alert("Compila tutti i campi.");
+    return;
+  }
+
+  if (esigenzaInModificaIndex !== null) {
+    // Modifica esigenza esistente
+    esigenze[esigenzaInModificaIndex] = {
+      utente: currentUser,
+      data,
+      testo
+    };
+    esigenzaInModificaIndex = null;
+  } else {
+    // Nuova esigenza
+    esigenze.push({
+      utente: currentUser,
+      data,
+      testo
+    });
+  }
+
+  aggiornaElencoEsigenze();
+  document.getElementById("esigenzaModal").style.display = "none";
+});
+
+document.getElementById("chiudiEsigenzaModal").addEventListener("click", () => {
+  document.getElementById("esigenzaModal").style.display = "none";
+});
+
